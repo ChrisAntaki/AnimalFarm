@@ -8,6 +8,13 @@ void exit_due_to_invalid_input() {
 	exit(0);
 }
 
+char get_single_char() {
+	char input;
+	std::cin >> input;
+	std::cin.ignore(INT_MAX, '\n');
+	return input;
+}
+
 void main() {
 	Animal * animal;
 
@@ -17,11 +24,7 @@ void main() {
 		<< "2. Duck\n"
 		<< "3. Horse\n";
 
-	std::string response;
-	std::cin >> response;
-	std::cin.ignore();
-
-	switch (response[0]) {
+	switch (get_single_char()) {
 	case '1':
 		animal = new Cat();
 		break;
@@ -41,12 +44,7 @@ void main() {
 		<< "1. Speak\n"
 		<< "2. Walk\n";
 
-	std::cin >> response;
-	std::cin.ignore();
-
-	std::cout << "\n";
-
-	switch (response[0]) {
+	switch (get_single_char()) {
 	case '1':
 		animal->Speak();
 		break;
