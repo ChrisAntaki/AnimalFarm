@@ -14,7 +14,7 @@ void Cat::Speak() {
 }
 
 void Cat::Walk() {
-	printf("Prowl, prowl.\n");
+	printf("Stroll, stroll.\n");
 }
 
 void Duck::Speak() {
