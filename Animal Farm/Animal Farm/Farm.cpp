@@ -16,7 +16,7 @@ char get_single_char() {
 }
 
 void main() {
-	Animal * animal;
+	IAnimal * animal;
 
 	std::cout
 		<< "Please choose an animal:\n"

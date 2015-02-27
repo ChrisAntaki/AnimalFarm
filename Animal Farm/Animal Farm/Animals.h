@@ -1,28 +1,28 @@
 #ifndef ANIMAL_H
 #define ANIMAL_H 1
 
-class Animal {
+class IAnimal {
 public:
-	virtual void Speak();
-	virtual void Walk();
+	virtual void Speak() = 0;
+	virtual void Walk() = 0;
 };
 
-class Cat : public Animal {
+class Cat : public IAnimal {
 public:
-	virtual void Speak();
-	virtual void Walk();
+	void Speak();
+	void Walk();
 };
 
-class Duck : public Animal {
+class Duck : public IAnimal {
 public:
-	virtual void Speak();
-	virtual void Walk();
+	void Speak();
+	void Walk();
 };
 
-class Horse : public Animal {
+class Horse : public IAnimal {
 public:
-	virtual void Speak();
-	virtual void Walk();
+	void Speak();
+	void Walk();
 };
 
 #endif // !ANIMAL_H
