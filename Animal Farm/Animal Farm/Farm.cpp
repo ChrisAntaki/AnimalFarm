@@ -49,10 +49,12 @@ void main() {
 	switch (get_single_char()) {
 	case '1':
 		system("cls");
+		printf("The %s is talking.\n  ", animal->GetName());
 		animal->Speak();
 		break;
 	case '2':
 		system("cls");
+		printf("The %s is walking.\n  ", animal->GetName());
 		animal->Walk();
 		break;
 	default:
