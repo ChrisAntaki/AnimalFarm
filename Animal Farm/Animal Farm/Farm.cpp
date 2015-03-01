@@ -18,6 +18,7 @@ char get_single_char() {
 void main() {
 	IAnimal * animal;
 
+	system("cls");
 	std::cout
 		<< "Please choose an animal:\n"
 		<< "1. Cat\n"
@@ -39,6 +40,7 @@ void main() {
 		break;
 	}
 
+	system("cls");
 	std::cout
 		<< "Please choose an action:\n"
 		<< "1. Speak\n"
@@ -46,9 +48,11 @@ void main() {
 
 	switch (get_single_char()) {
 	case '1':
+		system("cls");
 		animal->Speak();
 		break;
 	case '2':
+		system("cls");
 		animal->Walk();
 		break;
 	default:
