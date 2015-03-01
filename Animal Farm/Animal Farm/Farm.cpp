@@ -56,7 +56,5 @@ void main() {
 		break;
 	}
 
-	delete animal;
-
 	std::cin.get();
 }
