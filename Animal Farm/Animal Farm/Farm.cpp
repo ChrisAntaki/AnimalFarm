@@ -105,7 +105,7 @@ void main(int argc, const char *pArgv[]) {
 
 	int index = get_single_char() - '0' - 1;
 
-	if (index < 0 || index > animals.size()) {
+	if (index < 0 || index > animals.size() - 1) {
 		exit_due_to_invalid_input();
 	}
 
