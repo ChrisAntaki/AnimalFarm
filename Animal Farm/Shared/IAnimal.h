@@ -2,7 +2,7 @@
 
 class IAnimal {
 public:
-	virtual char * GetName() = 0;
+	virtual const char * GetName() = 0;
 	virtual void Speak() = 0;
 	virtual void Walk() = 0;
 };

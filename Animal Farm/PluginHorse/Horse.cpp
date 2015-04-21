@@ -22,12 +22,12 @@ BOOL WINAPI DllMain(
 //Our plugin's class
 class Horse : public IAnimal {
 public:
-	char * GetName();
+	const char * GetName();
 	void Speak();
 	void Walk();
 };
 
-char * Horse::GetName() {
+const char * Horse::GetName() {
 	return "Horse";
 }
 
