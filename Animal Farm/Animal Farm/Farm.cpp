@@ -24,6 +24,7 @@ bool LoadPlugin(const char * pFilepath)
 		if (NULL == hModule) break;
 
 		PGETIANIMALS getAnimals = (PGETIANIMALS)GetProcAddress(hModule, "GetIAnimals");
+		if (NULL == getAnimals) break;
 		getAnimals(&g_animals);
 
 		success = true;
