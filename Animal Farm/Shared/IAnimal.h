@@ -1,5 +1,9 @@
 #pragma once
 
+#include <vector>
+
+using namespace std;
+
 class IAnimal {
 public:
 	virtual const char * GetName() = 0;
@@ -7,4 +11,4 @@ public:
 	virtual void Walk() = 0;
 };
 
-typedef bool (CDECL *PGETIANIMAL)(IAnimal **);
+typedef bool (CDECL *PGETIANIMALS)(vector<IAnimal*> *);

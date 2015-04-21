@@ -1,25 +1,12 @@
 #include <iostream>
+#include <vector>
 #include <windows.h>
 
 #include "../Shared/IAnimal.h"
 
-IAnimal *g_pIAnimal = NULL;
+using namespace std;
 
-//This is called by windows for startup and shutdown
-BOOL WINAPI DllMain(
-	HINSTANCE hinstDLL,
-	DWORD fdwReason,
-	LPVOID lpvReserved
-	)
-{
-	//If it's shutting down, delete our animal instance
-	if (DLL_PROCESS_DETACH == fdwReason)
-		delete g_pIAnimal;
-
-	return TRUE;
-}
-
-//Our plugin's class
+// Define class(es)
 class Cat : public IAnimal {
 public:
 	const char * GetName();
@@ -39,23 +26,33 @@ void Cat::Walk() {
 	printf("Stroll, stroll.\n");
 }
 
-//extern "C" tells the compiler to not name-mangle the function name...
-//in C++ function names are turned into more complicated (mangled) names behind the scene
-//but since we're looking it up by name in our Farm App, we need the name exactly as it appears in code
+class LochNessMonster : public IAnimal {
+public:
+	const char * GetName();
+	void Speak();
+	void Walk();
+};
+
+const char * LochNessMonster::GetName() {
+	return "Loch Ness Monster";
+}
+
+void LochNessMonster::Speak() {
+	printf("You found me!?\n");
+}
+
+void LochNessMonster::Walk() {
+	printf("Splish, splash.\n");
+}
+
+// Export
 extern "C"
 {
-	//__declspec(dllexport) tells the project to export the address so it can be found with GetProcAddress
-
-	//CDECL... 
-	//  tells the compiler how to handle pushing/popping variables and the return addresses on the stack
-	//  we specifically declare it here so it's consistent 
-	//  also it prevents the compiler from adding on an _ and numerator to the end of function name
-	//  I'm not sure why it does this - I'd have to reseach more
-	__declspec(dllexport) bool CDECL GetIAnimal(IAnimal **pIAnimal)
+	__declspec(dllexport) bool CDECL GetIAnimals(vector<IAnimal*> * animals)
 	{
-		*pIAnimal = new Cat;
+		animals->push_back(new Cat);
+		animals->push_back(new LochNessMonster);
 
 		return true;
 	}
 }
-

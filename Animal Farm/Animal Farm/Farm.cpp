@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -5,12 +6,12 @@
 
 #include "../Shared/IAnimal.h"
 
-char g_fullPath[MAX_PATH] = { 0 };
-std::vector<PGETIANIMAL> g_constructors;
-std::vector<IAnimal*> g_animals;
-IAnimal * g_animal;
+using namespace std;
 
-bool LoadPlugin(const char *pFilepath)
+char g_fullPath[MAX_PATH] = { 0 };
+vector<IAnimal*> g_animals;
+
+bool LoadPlugin(const char * pFilepath)
 {
 	HMODULE hModule;
 
@@ -22,25 +23,21 @@ bool LoadPlugin(const char *pFilepath)
 		hModule = LoadLibrary(pFilepath);
 		if (NULL == hModule) break;
 
-		//If it loaded, see if it has a function "GetIAnimal".. 
-		//GetProcAddress will return the address of the function (I.e. a pointer to it) if it exists
-		PGETIANIMAL p = (PGETIANIMAL)GetProcAddress(hModule, "GetIAnimal");
-		if (NULL == p) break;
-
-		//Save the constructor.
-		g_constructors.push_back(p);
+		PGETIANIMALS getAnimals = (PGETIANIMALS)GetProcAddress(hModule, "GetIAnimals");
+		getAnimals(&g_animals);
 
 		success = true;
 	} while (false);
 
 	//If it failed to load as a plugin, free the library
-	if (false == success && NULL != hModule)
+	if (false == success && NULL != hModule) {
 		FreeLibrary(hModule);
+	}
 
 	return success;
 }
 
-void AddConstructors()
+void AddAnimals()
 {
 	//Figure out the directory the exe is running in
 	//and append *.dll to it so we can search for all the dlls in the directory
@@ -73,16 +70,20 @@ void AddConstructors()
 	}
 }
 
+bool SortAnimals(IAnimal * a, IAnimal * b) {
+	return strcmp(b->GetName(), a->GetName()) > 0;
+}
+
 void exit_due_to_invalid_input() {
-	std::cout << "Sorry, that input wasn't recognized.\n";
-	std::cin.get();
+	cout << "Sorry, that input wasn't recognized.\n";
+	cin.get();
 	exit(0);
 }
 
 char get_single_char() {
 	char input;
-	std::cin >> input;
-	std::cin.ignore(INT_MAX, '\n');
+	cin >> input;
+	cin.ignore(INT_MAX, '\n');
 	return input;
 }
 
@@ -90,17 +91,23 @@ void main(int argc, const char *pArgv[]) {
 	//Save full path of directory.
 	strncpy_s(g_fullPath, pArgv[0], sizeof(g_fullPath) - 1);
 
-	//Load constructors from DLLs.
-	AddConstructors();
+	//Load animals from DLLs.
+	AddAnimals();
+	sort(g_animals.begin(), g_animals.end(), SortAnimals);
 
 	//List animals as options.
 	system("cls");
-	std::cout << "Please choose an animal:\n";
-	for (int i = 0; i < (int)g_constructors.size(); i++) {
-		g_constructors.at(i)(&g_animal);
-		g_animals.push_back(g_animal);
+	if (g_animals.size() == 0) {
+		cout << "Where have all the animals gone? Animals?!\nPlease build an animal DLL to continue.\n";
+		cin.get();
+		return;
+	}
+	else {
+		cout << "Please choose an animal:\n";
+	}
 
-		std::cout << (i + 1) << ". " << g_animal->GetName() << "\n";
+	for (int i = 0; i < (int)g_animals.size(); i++) {
+		cout << (i + 1) << ". " << g_animals.at(i)->GetName() << "\n";
 	}
 
 	int index = get_single_char() - '0' - 1;
@@ -109,31 +116,29 @@ void main(int argc, const char *pArgv[]) {
 		exit_due_to_invalid_input();
 	}
 
-	g_animal = g_animals.at(index);
+	IAnimal * animal = g_animals.at(index);
 
 	system("cls");
-	std::cout
-		<< "Please choose an action for the " << g_animal->GetName() << ":\n"
+	cout
+		<< "Please choose an action for the " << animal->GetName() << ":\n"
 		<< "1. Speak\n"
 		<< "2. Walk\n";
 
 	switch (get_single_char()) {
 	case '1':
 		system("cls");
-		printf("The %s is talking.\n  ", g_animal->GetName());
-		g_animal->Speak();
+		printf("The %s is talking.\n  ", animal->GetName());
+		animal->Speak();
 		break;
 	case '2':
 		system("cls");
-		printf("The %s is walking.\n  ", g_animal->GetName());
-		g_animal->Walk();
+		printf("The %s is walking.\n  ", animal->GetName());
+		animal->Walk();
 		break;
 	default:
 		exit_due_to_invalid_input();
 		break;
 	}
 
-	delete g_animal;
-
-	std::cin.get();
+	cin.get();
 }
