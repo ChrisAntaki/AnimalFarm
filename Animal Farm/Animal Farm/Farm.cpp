@@ -5,10 +5,10 @@
 
 #include "../Shared/IAnimal.h"
 
-char fullPath[MAX_PATH] = { 0 };
-std::vector<PGETIANIMAL> constructors;
-std::vector<IAnimal*> animals;
-IAnimal * animal;
+char g_fullPath[MAX_PATH] = { 0 };
+std::vector<PGETIANIMAL> g_constructors;
+std::vector<IAnimal*> g_animals;
+IAnimal * g_animal;
 
 bool LoadPlugin(const char *pFilepath)
 {
@@ -28,7 +28,7 @@ bool LoadPlugin(const char *pFilepath)
 		if (NULL == p) break;
 
 		//Save the constructor.
-		constructors.push_back(p);
+		g_constructors.push_back(p);
 
 		success = true;
 	} while (false);
@@ -47,7 +47,7 @@ void AddConstructors()
 
 	//Determine the full exe path, copy it over
 	char directory[MAX_PATH] = { 0 };
-	strncpy_s(directory, fullPath, sizeof(directory) - 1);
+	strncpy_s(directory, g_fullPath, sizeof(directory) - 1);
 
 	//find the last slash in the path and null it out
 	//this leaves us with the directory but not the exe
@@ -88,7 +88,7 @@ char get_single_char() {
 
 void main(int argc, const char *pArgv[]) {
 	//Save full path of directory.
-	strncpy_s(fullPath, pArgv[0], sizeof(fullPath) - 1);
+	strncpy_s(g_fullPath, pArgv[0], sizeof(g_fullPath) - 1);
 
 	//Load constructors from DLLs.
 	AddConstructors();
@@ -96,44 +96,44 @@ void main(int argc, const char *pArgv[]) {
 	//List animals as options.
 	system("cls");
 	std::cout << "Please choose an animal:\n";
-	for (int i = 0; i < (int)constructors.size(); i++) {
-		constructors.at(i)(&animal);
-		animals.push_back(animal);
+	for (int i = 0; i < (int)g_constructors.size(); i++) {
+		g_constructors.at(i)(&g_animal);
+		g_animals.push_back(g_animal);
 
-		std::cout << (i + 1) << ". " << animal->GetName() << "\n";
+		std::cout << (i + 1) << ". " << g_animal->GetName() << "\n";
 	}
 
 	int index = get_single_char() - '0' - 1;
 
-	if (index < 0 || index > animals.size() - 1) {
+	if (index < 0 || index > g_animals.size() - 1) {
 		exit_due_to_invalid_input();
 	}
 
-	animal = animals.at(index);
+	g_animal = g_animals.at(index);
 
 	system("cls");
 	std::cout
-		<< "Please choose an action for the " << animal->GetName() << ":\n"
+		<< "Please choose an action for the " << g_animal->GetName() << ":\n"
 		<< "1. Speak\n"
 		<< "2. Walk\n";
 
 	switch (get_single_char()) {
 	case '1':
 		system("cls");
-		printf("The %s is talking.\n  ", animal->GetName());
-		animal->Speak();
+		printf("The %s is talking.\n  ", g_animal->GetName());
+		g_animal->Speak();
 		break;
 	case '2':
 		system("cls");
-		printf("The %s is walking.\n  ", animal->GetName());
-		animal->Walk();
+		printf("The %s is walking.\n  ", g_animal->GetName());
+		g_animal->Walk();
 		break;
 	default:
 		exit_due_to_invalid_input();
 		break;
 	}
 
-	delete animal;
+	delete g_animal;
 
 	std::cin.get();
 }
