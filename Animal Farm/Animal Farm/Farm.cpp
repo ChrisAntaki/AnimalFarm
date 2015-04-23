@@ -141,5 +141,11 @@ void main(int argc, const char *pArgv[]) {
 		break;
 	}
 
+	//Release memory.
+	while (g_animals.size() > 0) {
+		delete g_animals.back();
+		g_animals.pop_back();
+	}
+
 	cin.get();
 }
