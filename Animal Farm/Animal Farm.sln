@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PluginHorse", "PluginHorse\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PluginCat", "PluginCat\PluginCat.vcxproj", "{82B84216-7CBA-4ACC-B75D-2ABE7FD6A753}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tests", "Tests\Tests.vcxproj", "{90B981BE-93B7-4AD0-B6B3-B0A1E048450F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -39,6 +41,10 @@ Global
 		{82B84216-7CBA-4ACC-B75D-2ABE7FD6A753}.Debug|Win32.Build.0 = Debug|Win32
 		{82B84216-7CBA-4ACC-B75D-2ABE7FD6A753}.Release|Win32.ActiveCfg = Release|Win32
 		{82B84216-7CBA-4ACC-B75D-2ABE7FD6A753}.Release|Win32.Build.0 = Release|Win32
+		{90B981BE-93B7-4AD0-B6B3-B0A1E048450F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{90B981BE-93B7-4AD0-B6B3-B0A1E048450F}.Debug|Win32.Build.0 = Debug|Win32
+		{90B981BE-93B7-4AD0-B6B3-B0A1E048450F}.Release|Win32.ActiveCfg = Release|Win32
+		{90B981BE-93B7-4AD0-B6B3-B0A1E048450F}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
