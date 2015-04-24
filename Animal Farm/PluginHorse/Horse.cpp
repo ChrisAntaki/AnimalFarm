@@ -1,6 +1,7 @@
 #include <iostream>
 #include <windows.h>
 
+#include "../Animal Farm/AnimalArray.cpp"
 #include "../Shared/IAnimal.h"
 
 using namespace std;
@@ -66,11 +67,11 @@ void Unicorn::Walk() {
 // Export
 extern "C"
 {
-	__declspec(dllexport) bool CDECL GetIAnimals(vector<IAnimal*> * animals)
+	__declspec(dllexport) bool CDECL GetIAnimals(AnimalArray * animals)
 	{
-		animals->push_back(new Horse);
-		animals->push_back(new Chupacabra);
-		animals->push_back(new Unicorn);
+		animals->PushBack(new Horse);
+		animals->PushBack(new Chupacabra);
+		animals->PushBack(new Unicorn);
 
 		return true;
 	}

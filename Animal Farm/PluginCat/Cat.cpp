@@ -1,7 +1,7 @@
 #include <iostream>
-#include <vector>
 #include <windows.h>
 
+#include "../Animal Farm/AnimalArray.cpp"
 #include "../Shared/IAnimal.h"
 
 using namespace std;
@@ -48,10 +48,10 @@ void LochNessMonster::Walk() {
 // Export
 extern "C"
 {
-	__declspec(dllexport) bool CDECL GetIAnimals(vector<IAnimal*> * animals)
+	__declspec(dllexport) bool CDECL GetIAnimals(AnimalArray * animals)
 	{
-		animals->push_back(new Cat);
-		animals->push_back(new LochNessMonster);
+		animals->PushBack(new Cat);
+		animals->PushBack(new LochNessMonster);
 
 		return true;
 	}

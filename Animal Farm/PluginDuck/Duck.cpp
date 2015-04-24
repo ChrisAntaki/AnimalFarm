@@ -1,6 +1,7 @@
 #include <iostream>
 #include <windows.h>
 
+#include "../Animal Farm/AnimalArray.cpp"
 #include "../Shared/IAnimal.h"
 
 using namespace std;
@@ -28,9 +29,9 @@ void Duck::Walk() {
 // Export
 extern "C"
 {
-	__declspec(dllexport) bool CDECL GetIAnimals(vector<IAnimal*> * animals)
+	__declspec(dllexport) bool CDECL GetIAnimals(AnimalArray * animals)
 	{
-		animals->push_back(new Duck);
+		animals->PushBack(new Duck);
 
 		return true;
 	}

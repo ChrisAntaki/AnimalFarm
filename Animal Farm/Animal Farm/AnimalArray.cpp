@@ -55,6 +55,15 @@ void AnimalArray::PopBack() {
 	animals = newAnimals;
 }
 
+IAnimal * AnimalArray::At(int i) {
+	if (i > -1 && i < size) {
+		return animals[i];
+	}
+	else {
+		return NULL;
+	}
+}
+
 IAnimal * AnimalArray::Back() {
 	return animals[size - 1];
 }

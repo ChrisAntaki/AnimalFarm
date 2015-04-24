@@ -4,12 +4,13 @@
 #include <vector>
 #include <windows.h>
 
+#include "AnimalArray.h"
 #include "../Shared/IAnimal.h"
 
 using namespace std;
 
 char g_fullPath[MAX_PATH] = { 0 };
-vector<IAnimal*> g_animals;
+AnimalArray g_animals;
 
 bool LoadPlugin(const char * pFilepath)
 {
@@ -94,11 +95,11 @@ void main(int argc, const char *pArgv[]) {
 
 	//Load animals from DLLs.
 	AddAnimals();
-	sort(g_animals.begin(), g_animals.end(), SortAnimals);
+	//sort(g_animals.begin(), g_animals.end(), SortAnimals);
 
 	//List animals as options.
 	system("cls");
-	if (g_animals.size() == 0) {
+	if (g_animals.Size() == 0) {
 		cout << "Where have all the animals gone? Animals?!\nPlease build an animal DLL to continue.\n";
 		cin.get();
 		return;
@@ -107,17 +108,17 @@ void main(int argc, const char *pArgv[]) {
 		cout << "Please choose an animal:\n";
 	}
 
-	for (int i = 0; i < (int)g_animals.size(); i++) {
-		cout << (i + 1) << ". " << g_animals.at(i)->GetName() << "\n";
+	for (int i = 0; i < (int)g_animals.Size(); i++) {
+		cout << (i + 1) << ". " << g_animals.At(i)->GetName() << "\n";
 	}
 
 	int index = get_single_char() - '0' - 1;
 
-	if (index < 0 || index > g_animals.size() - 1) {
+	if (index < 0 || index > g_animals.Size() - 1) {
 		exit_due_to_invalid_input();
 	}
 
-	IAnimal * animal = g_animals.at(index);
+	IAnimal * animal = g_animals.At(index);
 
 	system("cls");
 	cout
@@ -142,9 +143,9 @@ void main(int argc, const char *pArgv[]) {
 	}
 
 	//Release memory.
-	while (g_animals.size() > 0) {
-		delete g_animals.back();
-		g_animals.pop_back();
+	while (g_animals.Size() > 0) {
+		delete g_animals.Back();
+		g_animals.PopBack();
 	}
 
 	cin.get();

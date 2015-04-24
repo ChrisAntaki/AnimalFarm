@@ -1,8 +1,5 @@
 #pragma once
 
-#include <vector>
-#include <windows.h>
-
 using namespace std;
 
 class IAnimal {
@@ -11,5 +8,3 @@ public:
 	virtual void Speak() = 0;
 	virtual void Walk() = 0;
 };
-
-typedef bool (CDECL *PGETIANIMALS)(vector<IAnimal*> *);
