@@ -108,6 +108,7 @@ void main(int argc, const char *pArgv[]) {
 		cout << "Please choose an animal:\n";
 	}
 
+	animals.HeapSort();
 	for (int i = 0; i < (int)animals.Size(); i++) {
 		cout << (i + 1) << ". " << animals.At(i)->GetName() << "\n";
 	}
