@@ -9,8 +9,8 @@
 
 using namespace std;
 
-char g_fullPath[MAX_PATH] = { 0 };
-AnimalArray g_animals;
+static char fullPath[MAX_PATH] = { 0 };
+static AnimalArray animals;
 
 bool LoadPlugin(const char * pFilepath)
 {
@@ -26,7 +26,7 @@ bool LoadPlugin(const char * pFilepath)
 
 		PGETIANIMALS getAnimals = (PGETIANIMALS)GetProcAddress(hModule, "GetIAnimals");
 		if (NULL == getAnimals) break;
-		getAnimals(&g_animals);
+		getAnimals(&animals);
 
 		success = true;
 	} while (false);
@@ -46,7 +46,7 @@ void AddAnimals()
 
 	//Determine the full exe path, copy it over
 	char directory[MAX_PATH] = { 0 };
-	strncpy_s(directory, g_fullPath, sizeof(directory) - 1);
+	strncpy_s(directory, fullPath, sizeof(directory) - 1);
 
 	//find the last slash in the path and null it out
 	//this leaves us with the directory but not the exe
@@ -91,15 +91,15 @@ char get_single_char() {
 
 void main(int argc, const char *pArgv[]) {
 	//Save full path of directory.
-	strncpy_s(g_fullPath, pArgv[0], sizeof(g_fullPath) - 1);
+	strncpy_s(fullPath, pArgv[0], sizeof(fullPath) - 1);
 
 	//Load animals from DLLs.
 	AddAnimals();
-	//sort(g_animals.begin(), g_animals.end(), SortAnimals);
+	//sort(animals.begin(), animals.end(), SortAnimals);
 
 	//List animals as options.
 	system("cls");
-	if (g_animals.Size() == 0) {
+	if (animals.Size() == 0) {
 		cout << "Where have all the animals gone? Animals?!\nPlease build an animal DLL to continue.\n";
 		cin.get();
 		return;
@@ -108,17 +108,17 @@ void main(int argc, const char *pArgv[]) {
 		cout << "Please choose an animal:\n";
 	}
 
-	for (int i = 0; i < (int)g_animals.Size(); i++) {
-		cout << (i + 1) << ". " << g_animals.At(i)->GetName() << "\n";
+	for (int i = 0; i < (int)animals.Size(); i++) {
+		cout << (i + 1) << ". " << animals.At(i)->GetName() << "\n";
 	}
 
 	int index = get_single_char() - '0' - 1;
 
-	if (index < 0 || index > g_animals.Size() - 1) {
+	if (index < 0 || index > animals.Size() - 1) {
 		exit_due_to_invalid_input();
 	}
 
-	IAnimal * animal = g_animals.At(index);
+	IAnimal * animal = animals.At(index);
 
 	system("cls");
 	cout
@@ -143,9 +143,9 @@ void main(int argc, const char *pArgv[]) {
 	}
 
 	//Release memory.
-	while (g_animals.Size() > 0) {
-		delete g_animals.Back();
-		g_animals.PopBack();
+	while (animals.Size() > 0) {
+		delete animals.Back();
+		animals.PopBack();
 	}
 
 	cin.get();
