@@ -27,8 +27,8 @@ private:
 
 	// Sorting
 	void BuildHeap();
-	void Reverse();
 	void Heapify(int, int);
+	void Reverse();
 	void Swap(int, int);
 
 };
