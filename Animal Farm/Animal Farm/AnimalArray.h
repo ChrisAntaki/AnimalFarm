@@ -16,10 +16,20 @@ public:
 	void PopBack();
 	void PushBack(IAnimal *);
 	size_t Size();
+	
+	// Sorting
+	void BubbleSort();
+	void HeapSort();
 
 private:
 	IAnimal ** animals;
 	int size;
+
+	// Sorting
+	void BuildHeap();
+	void Reverse();
+	void Heapify(int, int);
+	void Swap(int, int);
 
 };
 

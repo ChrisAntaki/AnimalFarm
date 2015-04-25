@@ -12,10 +12,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dog.cpp" />
+    <ClCompile Include="Fly.cpp" />
     <ClCompile Include="Tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dog.h" />
+    <ClInclude Include="Fly.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{90B981BE-93B7-4AD0-B6B3-B0A1E048450F}</ProjectGuid>

@@ -21,9 +21,15 @@
     <ClCompile Include="Dog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Fly.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Fly.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
