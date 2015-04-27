@@ -27,6 +27,7 @@ private:
 
 	// Sorting
 	void BuildHeap();
+	int Compare(int, int);
 	void Heapify(int, int);
 	void Reverse();
 	void Swap(int, int);

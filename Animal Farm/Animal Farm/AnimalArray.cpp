@@ -77,7 +77,7 @@ size_t AnimalArray::Size() {
 void AnimalArray::BubbleSort() {
 	for (int i = 0; i < size; i++) {
 		for (int ii = 1; ii < size - i; ii++) {
-			if (strcmp(animals[ii - 1]->GetName(), animals[ii]->GetName()) > 0) {
+			if (Compare(ii - 1, ii) > 0) {
 				Swap(ii, ii - 1);
 			}
 		}
@@ -101,23 +101,31 @@ void AnimalArray::HeapSort() {
 
 void AnimalArray::BuildHeap() {
 	for (int i = (size - 2) / 2; i > -1; i--) {
-		Heapify(i, size -1);
+		Heapify(i, size - 1);
 	}
+}
+
+int AnimalArray::Compare(int a, int b) {
+	return strcmp(animals[a]->GetName(), animals[b]->GetName());
 }
 
 void AnimalArray::Heapify(int parent, int last) {
 	int child = parent * 2 + 1;
 	while (child <= last) {
-		if (child + 1 <= last && strcmp(animals[child + 1]->GetName(), animals[child]->GetName()) < 0) {
+		if (child + 1 <= last && Compare(child, child + 1) > 0) {
 			child++;
 		}
 
-		if (strcmp(animals[child]->GetName(), animals[parent]->GetName()) < 0) {
+		if (Compare(child, parent) < 0) {
 			Swap(child, parent);
-		}
 
-		parent = child;
-		child = 2 * parent + 1;
+			parent = child;
+			child = 2 * parent + 1;
+			continue;
+		}
+		else {
+			break;
+		}
 	}
 }
 
