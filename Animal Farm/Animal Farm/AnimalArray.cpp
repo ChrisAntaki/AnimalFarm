@@ -43,10 +43,7 @@ void AnimalArray::PopBack() {
 
 	IAnimal ** newAnimals = (IAnimal **)malloc(sizeof(IAnimal *) * size);
 
-	int i;
-	for (i = 0; i < size; i++) {
-		newAnimals[i] = animals[i];
-	}
+	memmove(newAnimals, animals, sizeof(IAnimal *) * size);
 
 	free(animals);
 	animals = newAnimals;
@@ -55,10 +52,7 @@ void AnimalArray::PopBack() {
 void AnimalArray::PushBack(IAnimal * animal) {
 	IAnimal ** newAnimals = (IAnimal **)malloc(sizeof(IAnimal *) * (size + 1));
 
-	int i;
-	for (i = 0; i < size; i++) {
-		newAnimals[i] = animals[i];
-	}
+	memmove(newAnimals, animals, sizeof(IAnimal *) * size);
 
 	newAnimals[size] = animal;
 
