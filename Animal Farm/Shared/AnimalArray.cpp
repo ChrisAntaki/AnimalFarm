@@ -6,8 +6,6 @@
 using namespace std;
 
 AnimalArray::AnimalArray() {
-	animals = { 0 };
-	size = 0;
 }
 
 AnimalArray::~AnimalArray() {
@@ -31,6 +29,7 @@ void AnimalArray::Free() {
 	if (size > 0) {
 		free(animals);
 		size = 0;
+		sizeOfMemory = 0;
 	}
 }
 
@@ -41,28 +40,37 @@ void AnimalArray::PopBack() {
 
 	size--;
 
-	IAnimal ** newAnimals = (IAnimal **)malloc(sizeof(IAnimal *) * size);
-
-	memmove(newAnimals, animals, sizeof(IAnimal *) * size);
-
-	free(animals);
-	animals = newAnimals;
+	Reallocate();
 }
 
 void AnimalArray::PushBack(IAnimal * animal) {
-	IAnimal ** newAnimals = (IAnimal **)malloc(sizeof(IAnimal *) * (size + 1));
-
-	memmove(newAnimals, animals, sizeof(IAnimal *) * size);
-
-	newAnimals[size] = animal;
-
 	size++;
+
+	Reallocate();
+
+	animals[size - 1] = animal;
+}
+
+void AnimalArray::Reallocate() {
+	int newSizeOfMemory = ((size + chunkSize - 1) / chunkSize) * chunkSize * sizeof(IAnimal *);
+
+	if (sizeOfMemory == newSizeOfMemory) {
+		return;
+	}
+
+	IAnimal ** newAnimals = (IAnimal **)malloc(newSizeOfMemory);
+
+	if (sizeOfMemory > 0 && newSizeOfMemory > 0) {
+		int sizeOfMemoryToCopy = (sizeOfMemory < newSizeOfMemory) ? sizeOfMemory : newSizeOfMemory;
+		memmove(newAnimals, animals, sizeOfMemoryToCopy);
+	}
 
 	free(animals);
 	animals = newAnimals;
+	sizeOfMemory = newSizeOfMemory;
 }
 
-size_t AnimalArray::Size() {
+int AnimalArray::Size() {
 	return size;
 }
 

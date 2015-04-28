@@ -15,7 +15,7 @@ public:
 	void Free();
 	void PopBack();
 	void PushBack(IAnimal *);
-	size_t Size();
+	int Size();
 	
 	// Sorting
 	void BubbleSort();
@@ -23,7 +23,10 @@ public:
 
 private:
 	IAnimal ** animals;
-	int size;
+	const int chunkSize = 64;
+	int size = 0;
+	int sizeOfMemory = 0;
+	void Reallocate();
 
 	// Sorting
 	void BuildHeap();

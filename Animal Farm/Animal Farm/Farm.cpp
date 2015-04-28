@@ -148,7 +148,6 @@ void main(int argc, const char *pArgv[]) {
 		delete animals.Back();
 		animals.PopBack();
 	}
-	animals.Free();
 
 	cin.get();
 }
