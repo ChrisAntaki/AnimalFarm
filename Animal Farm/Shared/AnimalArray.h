@@ -2,7 +2,7 @@
 
 #include <windows.h>
 
-#include "../Shared/IAnimal.h"
+#include "IAnimal.h"
 
 class AnimalArray {
 

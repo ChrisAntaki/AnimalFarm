@@ -4,7 +4,7 @@
 #include <vector>
 #include <windows.h>
 
-#include "AnimalArray.h"
+#include "../Shared/AnimalArray.cpp"
 #include "../Shared/IAnimal.h"
 
 using namespace std;

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <windows.h>
 
-#include "../Animal Farm/AnimalArray.cpp"
+#include "../Shared/AnimalArray.cpp"
 #include "../Shared/IAnimal.h"
 
 using namespace std;
