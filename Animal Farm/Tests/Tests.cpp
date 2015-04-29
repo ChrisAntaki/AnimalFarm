@@ -1,7 +1,9 @@
 #include <assert.h>
 #include <iostream>
 
-#include "../Animal Farm/AnimalArray.cpp"
+
+#include "../Shared/FarmSDK.h"
+#include "../Shared/AnimalArray.cpp"
 #include "Dog.h"
 #include "Fly.h"
 

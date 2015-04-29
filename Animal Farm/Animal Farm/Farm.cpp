@@ -4,8 +4,8 @@
 #include <vector>
 #include <windows.h>
 
+#include "../Shared/FarmSDK.h"
 #include "../Shared/AnimalArray.cpp"
-#include "../Shared/IAnimal.h"
 
 using namespace std;
 

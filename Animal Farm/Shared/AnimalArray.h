@@ -22,10 +22,10 @@ public:
 	void HeapSort();
 
 private:
-	IAnimal ** animals;
-	const int chunkSize = 64;
-	int size = 0;
-	int sizeOfMemory = 0;
+	IAnimal ** m_animals;
+	const int m_chunkSize = 64;
+	int m_size = 0;
+	int m_sizeOfMemory = 0;
 	void Reallocate();
 
 	// Sorting

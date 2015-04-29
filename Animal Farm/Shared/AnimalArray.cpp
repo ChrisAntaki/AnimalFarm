@@ -1,7 +1,6 @@
 #include <iostream>
 
-#include "../Shared/IAnimal.h"
-#include "AnimalArray.h"
+#include "FarmSDK.h"
 
 using namespace std;
 
@@ -13,8 +12,8 @@ AnimalArray::~AnimalArray() {
 }
 
 IAnimal * AnimalArray::At(int i) {
-	if (i > -1 && i < size) {
-		return animals[i];
+	if (i > -1 && i < m_size) {
+		return m_animals[i];
 	}
 	else {
 		return NULL;
@@ -22,63 +21,63 @@ IAnimal * AnimalArray::At(int i) {
 }
 
 IAnimal * AnimalArray::Back() {
-	return animals[size - 1];
+	return m_animals[m_size - 1];
 }
 
 void AnimalArray::Free() {
-	if (size > 0) {
-		free(animals);
-		size = 0;
-		sizeOfMemory = 0;
+	if (m_size > 0) {
+		free(m_animals);
+		m_size = 0;
+		m_sizeOfMemory = 0;
 	}
 }
 
 void AnimalArray::PopBack() {
-	if (size == 0) {
+	if (m_size == 0) {
 		return;
 	}
 
-	size--;
+	m_size--;
 
 	Reallocate();
 }
 
 void AnimalArray::PushBack(IAnimal * animal) {
-	size++;
+	m_size++;
 
 	Reallocate();
 
-	animals[size - 1] = animal;
+	m_animals[m_size - 1] = animal;
 }
 
 void AnimalArray::Reallocate() {
-	int newSizeOfMemory = ((size + chunkSize - 1) / chunkSize) * chunkSize * sizeof(IAnimal *);
+	int newSizeOfMemory = ((m_size + m_chunkSize - 1) / m_chunkSize) * m_chunkSize * sizeof(IAnimal *);
 
-	if (sizeOfMemory == newSizeOfMemory) {
+	if (m_sizeOfMemory == newSizeOfMemory) {
 		return;
 	}
 
 	IAnimal ** newAnimals = (IAnimal **)malloc(newSizeOfMemory);
 
-	if (sizeOfMemory > 0 && newSizeOfMemory > 0) {
-		int sizeOfMemoryToCopy = (sizeOfMemory < newSizeOfMemory) ? sizeOfMemory : newSizeOfMemory;
-		memmove(newAnimals, animals, sizeOfMemoryToCopy);
+	if (m_sizeOfMemory > 0 && newSizeOfMemory > 0) {
+		int sizeOfMemoryToCopy = (m_sizeOfMemory < newSizeOfMemory) ? m_sizeOfMemory : newSizeOfMemory;
+		memmove(newAnimals, m_animals, sizeOfMemoryToCopy);
 	}
 
-	free(animals);
-	animals = newAnimals;
-	sizeOfMemory = newSizeOfMemory;
+	free(m_animals);
+	m_animals = newAnimals;
+	m_sizeOfMemory = newSizeOfMemory;
 }
 
 int AnimalArray::Size() {
-	return size;
+	return m_size;
 }
 
 // Sorting (public)
 
 void AnimalArray::BubbleSort() {
-	for (int i = 0; i < size; i++) {
-		for (int ii = 1; ii < size - i; ii++) {
+	for (int i = 0; i < m_size; i++) {
+		for (int ii = 1; ii < m_size - i; ii++) {
 			if (Compare(ii - 1, ii) > 0) {
 				Swap(ii, ii - 1);
 			}
@@ -89,7 +88,7 @@ void AnimalArray::BubbleSort() {
 void AnimalArray::HeapSort() {
 	BuildHeap();
 
-	int last = size - 1;
+	int last = m_size - 1;
 	while (last > 0) {
 		Swap(0, last);
 		last--;
@@ -102,13 +101,13 @@ void AnimalArray::HeapSort() {
 // Sorting (private)
 
 void AnimalArray::BuildHeap() {
-	for (int i = (size - 2) / 2; i > -1; i--) {
-		Heapify(i, size - 1);
+	for (int i = (m_size - 2) / 2; i > -1; i--) {
+		Heapify(i, m_size - 1);
 	}
 }
 
 int AnimalArray::Compare(int a, int b) {
-	return strcmp(animals[a]->GetName(), animals[b]->GetName());
+	return strcmp(m_animals[a]->GetName(), m_animals[b]->GetName());
 }
 
 void AnimalArray::Heapify(int parent, int last) {
@@ -132,19 +131,19 @@ void AnimalArray::Heapify(int parent, int last) {
 }
 
 void AnimalArray::Reverse() {
-	float half = (float)size / 2;
+	float half = (float)m_size / 2;
 
 	for (int i = 0; i < half; i++) {
-		if (i == size - i - 1) {
+		if (i == m_size - i - 1) {
 			break;
 		}
 
-		Swap(i, size - i - 1);
+		Swap(i, m_size - i - 1);
 	}
 }
 
 void AnimalArray::Swap(int a, int b) {
-	IAnimal * temp = animals[a];
-	animals[a] = animals[b];
-	animals[b] = temp;
+	IAnimal * temp = m_animals[a];
+	m_animals[a] = m_animals[b];
+	m_animals[b] = temp;
 }
