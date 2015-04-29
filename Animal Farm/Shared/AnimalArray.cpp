@@ -28,7 +28,6 @@ void AnimalArray::Free() {
 	if (m_size > 0) {
 		free(m_animals);
 		m_size = 0;
-		m_sizeOfMemory = 0;
 	}
 }
 
@@ -51,22 +50,8 @@ void AnimalArray::PushBack(IAnimal * animal) {
 }
 
 void AnimalArray::Reallocate() {
-	int newSizeOfMemory = ((m_size + m_chunkSize - 1) / m_chunkSize) * m_chunkSize * sizeof(IAnimal *);
-
-	if (m_sizeOfMemory == newSizeOfMemory) {
-		return;
-	}
-
-	IAnimal ** newAnimals = (IAnimal **)malloc(newSizeOfMemory);
-
-	if (m_sizeOfMemory > 0 && newSizeOfMemory > 0) {
-		int sizeOfMemoryToCopy = (m_sizeOfMemory < newSizeOfMemory) ? m_sizeOfMemory : newSizeOfMemory;
-		memmove(newAnimals, m_animals, sizeOfMemoryToCopy);
-	}
-
-	free(m_animals);
-	m_animals = newAnimals;
-	m_sizeOfMemory = newSizeOfMemory;
+	int sizeOfMemory = ((m_size + m_chunkSize - 1) / m_chunkSize) * m_chunkSize * sizeof(IAnimal *);
+	m_animals = (IAnimal **)realloc(m_animals, sizeOfMemory);
 }
 
 int AnimalArray::Size() {
