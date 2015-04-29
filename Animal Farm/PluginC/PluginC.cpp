@@ -67,7 +67,7 @@ void Unicorn::Walk() {
 // Export
 extern "C"
 {
-	__declspec(dllexport) bool CDECL GetIAnimals(AnimalArray * animals)
+	__declspec(dllexport) bool CDECL GetIAnimals(AnimalArray<IAnimal> * animals)
 	{
 		animals->PushBack(new Horse);
 		animals->PushBack(new Chupacabra);

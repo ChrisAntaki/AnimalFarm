@@ -4,17 +4,17 @@
 
 #include "IAnimal.h"
 
-class AnimalArray {
+template <class ClassA> class AnimalArray {
 
 public:
 	AnimalArray();
 	~AnimalArray();
 
-	IAnimal * At(int);
-	IAnimal * Back();
+	ClassA * At(int);
+	ClassA * Back();
 	void Free();
 	void PopBack();
-	void PushBack(IAnimal *);
+	void PushBack(ClassA *);
 	int Size();
 	
 	// Sorting
@@ -22,7 +22,7 @@ public:
 	void HeapSort();
 
 private:
-	IAnimal ** m_animals = NULL;
+	ClassA ** m_animals = NULL;
 	const int m_chunkSize = 64;
 	int m_size = 0;
 	void Reallocate();
@@ -36,4 +36,4 @@ private:
 
 };
 
-typedef bool (CDECL *PGETIANIMALS)(AnimalArray *);
+typedef bool (CDECL *PGETIANIMALS)(AnimalArray<IAnimal> *);

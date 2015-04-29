@@ -48,7 +48,7 @@ void LochNessMonster::Walk() {
 // Export
 extern "C"
 {
-	__declspec(dllexport) bool CDECL GetIAnimals(AnimalArray * animals)
+	__declspec(dllexport) bool CDECL GetIAnimals(AnimalArray<IAnimal> * animals)
 	{
 		animals->PushBack(new Cat);
 		animals->PushBack(new LochNessMonster);

@@ -10,7 +10,7 @@
 using namespace std;
 
 static char fullPath[MAX_PATH] = { 0 };
-static AnimalArray animals;
+static AnimalArray<IAnimal> animals;
 
 bool LoadPlugin(const char * pFilepath)
 {
