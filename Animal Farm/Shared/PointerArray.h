@@ -4,11 +4,11 @@
 
 #include "IAnimal.h"
 
-template <class ClassA> class AnimalArray {
+template <class ClassA> class PointerArray {
 
 public:
-	AnimalArray();
-	~AnimalArray();
+	PointerArray();
+	~PointerArray();
 
 	ClassA * At(int);
 	ClassA * Back();
@@ -36,4 +36,4 @@ private:
 
 };
 
-typedef bool (CDECL *PGETIANIMALS)(AnimalArray<IAnimal> *);
+typedef bool (CDECL *PGETIANIMALS)(PointerArray<IAnimal> *);

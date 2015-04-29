@@ -5,12 +5,12 @@
 #include <windows.h>
 
 #include "../Shared/FarmSDK.h"
-#include "../Shared/AnimalArray.cpp"
+#include "../Shared/PointerArray.cpp"
 
 using namespace std;
 
 static char fullPath[MAX_PATH] = { 0 };
-static AnimalArray<IAnimal> animals;
+static PointerArray<IAnimal> animals;
 
 bool LoadPlugin(const char * pFilepath)
 {

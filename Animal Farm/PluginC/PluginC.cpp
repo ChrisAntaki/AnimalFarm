@@ -2,7 +2,7 @@
 #include <windows.h>
 
 #include "../Shared/FarmSDK.h"
-#include "../Shared/AnimalArray.cpp"
+#include "../Shared/PointerArray.cpp"
 
 using namespace std;
 
@@ -67,7 +67,7 @@ void Unicorn::Walk() {
 // Export
 extern "C"
 {
-	__declspec(dllexport) bool CDECL GetIAnimals(AnimalArray<IAnimal> * animals)
+	__declspec(dllexport) bool CDECL GetIAnimals(PointerArray<IAnimal> * animals)
 	{
 		animals->PushBack(new Horse);
 		animals->PushBack(new Chupacabra);

@@ -24,15 +24,15 @@
     <ClInclude Include="IAnimal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AnimalArray.h">
+    <ClInclude Include="FarmSDK.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FarmSDK.h">
+    <ClInclude Include="PointerArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AnimalArray.cpp">
+    <ClCompile Include="PointerArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

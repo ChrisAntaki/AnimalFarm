@@ -4,14 +4,14 @@
 
 using namespace std;
 
-template <class ClassA> AnimalArray<ClassA>::AnimalArray() {
+template <class ClassA> PointerArray<ClassA>::PointerArray() {
 }
 
-template <class ClassA> AnimalArray<ClassA>::~AnimalArray() {
+template <class ClassA> PointerArray<ClassA>::~PointerArray() {
 	Free();
 }
 
-template <class ClassA> ClassA * AnimalArray<ClassA>::At(int i) {
+template <class ClassA> ClassA * PointerArray<ClassA>::At(int i) {
 	if (i > -1 && i < m_size) {
 		return m_animals[i];
 	}
@@ -20,18 +20,18 @@ template <class ClassA> ClassA * AnimalArray<ClassA>::At(int i) {
 	}
 }
 
-template <class ClassA> ClassA * AnimalArray<ClassA>::Back() {
+template <class ClassA> ClassA * PointerArray<ClassA>::Back() {
 	return m_animals[m_size - 1];
 }
 
-template <class ClassA> void AnimalArray<ClassA>::Free() {
+template <class ClassA> void PointerArray<ClassA>::Free() {
 	if (m_size > 0) {
 		free(m_animals);
 		m_size = 0;
 	}
 }
 
-template <class ClassA> void AnimalArray<ClassA>::PopBack() {
+template <class ClassA> void PointerArray<ClassA>::PopBack() {
 	if (m_size == 0) {
 		return;
 	}
@@ -41,7 +41,7 @@ template <class ClassA> void AnimalArray<ClassA>::PopBack() {
 	Reallocate();
 }
 
-template <class ClassA> void AnimalArray<ClassA>::PushBack(ClassA * animal) {
+template <class ClassA> void PointerArray<ClassA>::PushBack(ClassA * animal) {
 	m_size++;
 
 	Reallocate();
@@ -49,18 +49,18 @@ template <class ClassA> void AnimalArray<ClassA>::PushBack(ClassA * animal) {
 	m_animals[m_size - 1] = animal;
 }
 
-template <class ClassA> void AnimalArray<ClassA>::Reallocate() {
+template <class ClassA> void PointerArray<ClassA>::Reallocate() {
 	int sizeOfMemory = ((m_size + m_chunkSize - 1) / m_chunkSize) * m_chunkSize * sizeof(ClassA *);
 	m_animals = (ClassA **)realloc(m_animals, sizeOfMemory);
 }
 
-template <class ClassA> int AnimalArray<ClassA>::Size() {
+template <class ClassA> int PointerArray<ClassA>::Size() {
 	return m_size;
 }
 
 // Sorting (public)
 
-template <class ClassA> void AnimalArray<ClassA>::BubbleSort() {
+template <class ClassA> void PointerArray<ClassA>::BubbleSort() {
 	for (int i = 0; i < m_size; i++) {
 		for (int ii = 1; ii < m_size - i; ii++) {
 			if (Compare(ii - 1, ii) > 0) {
@@ -70,7 +70,7 @@ template <class ClassA> void AnimalArray<ClassA>::BubbleSort() {
 	}
 }
 
-template <class ClassA> void AnimalArray<ClassA>::HeapSort() {
+template <class ClassA> void PointerArray<ClassA>::HeapSort() {
 	BuildHeap();
 
 	int last = m_size - 1;
@@ -85,17 +85,17 @@ template <class ClassA> void AnimalArray<ClassA>::HeapSort() {
 
 // Sorting (private)
 
-template <class ClassA> void AnimalArray<ClassA>::BuildHeap() {
+template <class ClassA> void PointerArray<ClassA>::BuildHeap() {
 	for (int i = (m_size - 2) / 2; i > -1; i--) {
 		Heapify(i, m_size - 1);
 	}
 }
 
-template <class ClassA> int AnimalArray<ClassA>::Compare(int a, int b) {
+template <class ClassA> int PointerArray<ClassA>::Compare(int a, int b) {
 	return strcmp(m_animals[a]->GetName(), m_animals[b]->GetName());
 }
 
-template <class ClassA> void AnimalArray<ClassA>::Heapify(int parent, int last) {
+template <class ClassA> void PointerArray<ClassA>::Heapify(int parent, int last) {
 	int child = parent * 2 + 1;
 	while (child <= last) {
 		if (child + 1 <= last && Compare(child, child + 1) > 0) {
@@ -115,7 +115,7 @@ template <class ClassA> void AnimalArray<ClassA>::Heapify(int parent, int last) 
 	}
 }
 
-template <class ClassA> void AnimalArray<ClassA>::Reverse() {
+template <class ClassA> void PointerArray<ClassA>::Reverse() {
 	float half = (float)m_size / 2;
 
 	for (int i = 0; i < half; i++) {
@@ -127,7 +127,7 @@ template <class ClassA> void AnimalArray<ClassA>::Reverse() {
 	}
 }
 
-template <class ClassA> void AnimalArray<ClassA>::Swap(int a, int b) {
+template <class ClassA> void PointerArray<ClassA>::Swap(int a, int b) {
 	ClassA * temp = m_animals[a];
 	m_animals[a] = m_animals[b];
 	m_animals[b] = temp;
