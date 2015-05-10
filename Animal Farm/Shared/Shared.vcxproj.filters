@@ -15,24 +15,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="IAnimal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FarmSDK.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PointerArray.h">
+    <ClInclude Include="FlexibleArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PointerArray.cpp">
+    <ClCompile Include="FlexibleArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

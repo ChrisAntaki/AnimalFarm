@@ -4,24 +4,26 @@
 
 
 #include "../Shared/FarmSDK.h"
-#include "../Shared/PointerArray.cpp"
+#include "../Shared/FlexibleArray.cpp"
 #include "Dog.h"
 #include "Fly.h"
 
 using namespace std;
 
 void main() {
-	PointerArray<string> stringArray;
+	FlexibleArray<int> stringArray;
 
-	string word1 = "Word1";
-	string word2 = "Word2";
+	stringArray.PushBack(88);
+	stringArray.PushBack(66);
+	stringArray.PushBack(44);
 
-	stringArray.PushBack(&word1);
-	stringArray.PushBack(&word2);
+	assert(stringArray.Size() == 3);
 
-	assert(stringArray.Size() == 2);
+	cout << stringArray.Back() << "\n";
 
-	cout << *stringArray.At(1) << "\n";
+	stringArray.PopBack();
+
+	cout << stringArray.Back() << "\n";
 
 	stringArray.Free();
 

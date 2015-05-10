@@ -2,7 +2,7 @@
 #include <windows.h>
 
 #include "../Shared/FarmSDK.h"
-#include "../Shared/PointerArray.cpp"
+#include "../Shared/FlexibleArray.cpp"
 
 using namespace std;
 
@@ -29,7 +29,7 @@ void Duck::Walk() {
 // Export
 extern "C"
 {
-	__declspec(dllexport) bool CDECL GetIAnimals(PointerArray<IAnimal> * animals)
+	__declspec(dllexport) bool CDECL GetIAnimals(FlexibleArray<IAnimal *> * animals)
 	{
 		animals->PushBack(new Duck);
 

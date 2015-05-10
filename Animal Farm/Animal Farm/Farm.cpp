@@ -5,12 +5,12 @@
 #include <windows.h>
 
 #include "../Shared/FarmSDK.h"
-#include "../Shared/PointerArray.cpp"
+#include "../Shared/FlexibleArray.cpp"
 
 using namespace std;
 
 static char fullPath[MAX_PATH] = { 0 };
-static PointerArray<IAnimal> animals;
+static FlexibleArray<IAnimal *> animals;
 
 bool LoadPlugin(const char * pFilepath)
 {
@@ -95,7 +95,6 @@ void main(int argc, const char *pArgv[]) {
 
 	//Load animals from DLLs.
 	AddAnimals();
-	//sort(animals.begin(), animals.end(), SortAnimals);
 
 	//List animals as options.
 	system("cls");
@@ -108,7 +107,7 @@ void main(int argc, const char *pArgv[]) {
 		cout << "Please choose an animal:\n";
 	}
 
-	animals.HeapSort();
+	sort(animals.Begin(), animals.End(), SortAnimals);
 	for (int i = 0; i < (int)animals.Size(); i++) {
 		cout << (i + 1) << ". " << animals.At(i)->GetName() << "\n";
 	}

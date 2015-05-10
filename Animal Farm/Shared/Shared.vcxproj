@@ -74,14 +74,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="PointerArray.h" />
+    <ClInclude Include="FlexibleArray.h" />
     <ClInclude Include="FarmSDK.h" />
     <ClInclude Include="IAnimal.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PointerArray.cpp" />
+    <ClCompile Include="FlexibleArray.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

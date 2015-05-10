@@ -1,4 +1,4 @@
 #pragma once
 
 #include "IAnimal.h"
-#include "PointerArray.h"
+#include "FlexibleArray.h"
