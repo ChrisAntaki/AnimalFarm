@@ -11,22 +11,31 @@
 using namespace std;
 
 void main() {
-	FlexibleArray<int> stringArray;
+	FlexibleArray<int> intArray;
 
-	stringArray.PushBack(88);
-	cout << "Size: " << stringArray.Size() << "\n";
-	cout << "@1: " << stringArray.At(0) << "\n";
+	intArray.PushBack(88);
+	assert(intArray.At(0) == 88);
 
-	stringArray.Remove(0);
-	cout << "Size: " << stringArray.Size() << "\n";
+	intArray.Remove(0);
+	assert(intArray.Size() == 0);
 
-	stringArray.PushBack(66);
-	stringArray.PushBack(44);
-	stringArray.PushBack(33);
-	stringArray.PushBack(22);
-	stringArray.PushBack(11);
-	cout << "Size: " << stringArray.Size() << "\n";
-	cout << "@1: " << stringArray.At(1) << "\n";
+	intArray.PushBack(66);
+	intArray.PushBack(44);
+	intArray.PushBack(33);
+	intArray.PushBack(22);
+	intArray.PushBack(11);
+	assert(intArray.Size() == 5);
+	assert(intArray.At(1) == 44);
+
+	FlexibleArray<IAnimal *> animalArray;
+	animalArray.PushBack(new Dog);
+	animalArray.PushBack(new Fly);
+	assert(animalArray.Size() == 2);
+	assert(strcmp(animalArray.At(0)->GetName(), "Dog") == 0);
+	animalArray.Remove(0);
+	assert(strcmp(animalArray.At(0)->GetName(), "Fly") == 0);
+	animalArray.Remove(0);
+	assert(animalArray.Size() == 0);
 
 	cin.get();
 }
