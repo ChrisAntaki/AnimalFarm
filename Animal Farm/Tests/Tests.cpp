@@ -14,20 +14,19 @@ void main() {
 	FlexibleArray<int> stringArray;
 
 	stringArray.PushBack(88);
+	cout << "Size: " << stringArray.Size() << "\n";
+	cout << "@1: " << stringArray.At(0) << "\n";
+
+	stringArray.Remove(0);
+	cout << "Size: " << stringArray.Size() << "\n";
+
 	stringArray.PushBack(66);
 	stringArray.PushBack(44);
-
-	assert(stringArray.Size() == 3);
-
-	cout << stringArray.Back() << "\n";
-
-	stringArray.PopBack();
-
-	cout << stringArray.Back() << "\n";
-
-	stringArray.Free();
-
-	cout << "All the tests have passed!\n";
+	stringArray.PushBack(33);
+	stringArray.PushBack(22);
+	stringArray.PushBack(11);
+	cout << "Size: " << stringArray.Size() << "\n";
+	cout << "@1: " << stringArray.At(1) << "\n";
 
 	cin.get();
 }

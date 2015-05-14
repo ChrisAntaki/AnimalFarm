@@ -61,6 +61,23 @@ template <class ClassA> void FlexibleArray<ClassA>::PushBack(ClassA item) {
 	m_items[m_size - 1] = item;
 }
 
+template <class ClassA> void FlexibleArray<ClassA>::Remove(int i) {
+	if (i < 0 && i > m_size - 1) {
+		throw out_of_range("That element doesn't exist.");
+	}
+
+	if (m_size == 1) {
+		PopBack();
+		return;
+	}
+
+	m_size--;
+
+	memcpy((m_items + i), (m_items + i + 1), (sizeof(ClassA) * (m_size - i)));
+
+	Reallocate();
+}
+
 template <class ClassA> int FlexibleArray<ClassA>::Size() {
 	return m_size;
 }

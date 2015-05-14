@@ -17,6 +17,7 @@ public:
 	void Free();
 	void PopBack();
 	void PushBack(ClassA);
+	void Remove(int);
 	int Size();
 
 private:
