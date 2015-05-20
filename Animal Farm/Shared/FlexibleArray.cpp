@@ -73,7 +73,7 @@ template <class ClassA> void FlexibleArray<ClassA>::Remove(int i) {
 
 	m_size--;
 
-	memcpy((m_items + i), (m_items + i + 1), (sizeof(ClassA) * (m_size - i)));
+	memmove((m_items + i), (m_items + i + 1), (sizeof(ClassA) * (m_size - i)));
 
 	Reallocate();
 }
